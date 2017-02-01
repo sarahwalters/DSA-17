@@ -8,14 +8,14 @@ import your_code.MyStack;
 
 public class StackTest {
 
-    private MyStack stack;
+    private MyStack<Integer> stack;
 
     /**
      * @throws Exception
      */
     @Before
     public void setUp() throws Exception {
-        stack = new MyStack();
+        stack = new MyStack<>();
         stack.push(1);
         stack.push(4);
         stack.push(2);
@@ -27,7 +27,7 @@ public class StackTest {
     @Test
     public void testStack() {
         stack.push(3);
-        int e = stack.pop();
+        Integer e = stack.pop();
         assertThat(e, is(3));
 
         int bigNumber = 6;

@@ -11,8 +11,8 @@ import static org.junit.Assert.assertThat;
 
 public class QueueTest {
 
-    private MyQueue queue;
-    private MyPriorityQueue maxQueue;
+    private MyQueue<Integer> queue;
+    private MyPriorityQueue<Integer> maxQueue;
 
     /**
      * @throws Exception

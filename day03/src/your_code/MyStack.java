@@ -1,37 +1,48 @@
 package your_code;
 
 import ADTs.StackADT;
+import java.util.LinkedList;
 
 /**
  * An implementation of the Stack interface.
  */
-public class MyStack implements StackADT<Integer> {
+public class MyStack<T extends Comparable<? super T>> implements StackADT<T> {
+    private LinkedList<T> elts;
+    private LinkedList<T> max;
 
-    @Override
-    public void push(Integer e) {
-        // TODO
+    public MyStack() {
+        this.elts = new LinkedList<>();
+        this.max = new LinkedList<>();
     }
 
     @Override
-    public Integer pop() {
-        // TODO
-        return null;
+    public void push(T e) {
+        this.elts.addFirst(e);
+        if (this.max.size() == 0 || this.max.getFirst().compareTo(e) <= 0) {
+            this.max.addFirst(e);
+        }
+    }
+
+    @Override
+    public T pop() {
+        T toRemove = this.elts.removeFirst();
+        if (this.max.getFirst().equals(toRemove)) {
+            this.max.removeFirst();
+        }
+        return toRemove;
     }
 
     @Override
     public boolean isEmpty() {
-        // TODO
-        return false;
+        return this.elts.size() == 0;
     }
 
     @Override
-    public Integer peek() {
-        // TODO
-        return null;
+    public T peek() {
+        return this.elts.getFirst();
     }
 
-    public Integer maxElement() {
-        // TODO
-        return null;
+    public T maxElement() {
+        return max.getFirst();
     }
 }
