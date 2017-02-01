@@ -51,7 +51,7 @@ public class PsetProblems {
             current = s.pop();
 
             // Figure out where to add current to stack
-            while (!(helperStack.isEmpty() || current >= helperStack.peek())) {
+            while (!(helperStack.isEmpty() || current <= helperStack.peek())) {
                 s.push(helperStack.pop());
             }
             helperStack.push(current);
