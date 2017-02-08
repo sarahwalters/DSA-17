@@ -44,7 +44,12 @@ public class MyLinearMap<K, V> implements Map<K, V> {
 
 	// Returns the entry that contains the target key, or null if there is none.
 	private Entry findEntry(Object target) {
-		// TODO
+		for (int i = 0; i < entries.size(); i++) {
+			Entry entry = this.entries.get(i);
+			if (this.equals(target, entry.getKey())) {
+				return entry;
+			}
+		}
 		return null;
 	}
 
@@ -73,7 +78,12 @@ public class MyLinearMap<K, V> implements Map<K, V> {
 
 	@Override
 	public V get(Object key) {
-		// TODO
+		for (int i = 0; i < entries.size(); i++) {
+			Entry entry = this.entries.get(i);
+			if (this.equals(key, entry.getKey())) {
+				return entry.getValue();
+			}
+		}
 		return null;
 	}
 
@@ -93,8 +103,20 @@ public class MyLinearMap<K, V> implements Map<K, V> {
 
 	@Override
 	public V put(K key, V value) {
-		// TODO
-		return null;
+		boolean overwroteExisting = false;
+		for (int i = 0; i < entries.size(); i++) {
+			Entry entry = this.entries.get(i);
+			if (this.equals(key, entry.getKey())) {
+				entry.setValue(value);
+				overwroteExisting = true;
+			}
+		}
+
+		if (!overwroteExisting) {
+			this.entries.add(new Entry(key, value));
+		}
+
+		return value;
 	}
 
 	@Override
@@ -106,8 +128,19 @@ public class MyLinearMap<K, V> implements Map<K, V> {
 
 	@Override
 	public V remove(Object key) {
-		// TODO
-		return null;
+		Entry toRemove = null;
+		int toRemoveIndex = -1;
+		for (int i = 0; i < entries.size(); i++) {
+			Entry entry = this.entries.get(i);
+			if (this.equals(key, entry.getKey())) {
+				toRemoveIndex = i;
+				toRemove = entry;
+				break;
+			}
+		}
+
+		this.entries.remove(toRemoveIndex);
+		return toRemove.getValue();
 	}
 
 	@Override
